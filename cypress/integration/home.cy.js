@@ -25,7 +25,7 @@ describe('Validar teste na tela do Bugereats', () => {
       cy.get('[placeholder="Número"]').type('540')
       cy.get('[placeholder="Complemento"]').type('Casa')
       cy.get('.delivery-method > :nth-child(3)').click()
-      cy.get('.dropzone').selectFile('download (1).jpeg', { action: 'drag-drop' })
+      cy.get('.dropzone').selectFile('cypress/fixtures/download (1).jpeg', { action: 'drag-drop' })
       cy.get('.button-success').click()
       cy.get('.swal2-popup')
           .should('contain.text', 'Recebemos os seus dados. Fique de olho na sua caixa de email, pois e em breve retornamos o contato.')
