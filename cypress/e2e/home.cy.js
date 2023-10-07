@@ -14,16 +14,19 @@ describe('Validar teste na tela do Bugereats', () => {
     it('validando CLICAR e preencher formulário no botão cadastro', () => {
         cy.visit('https://buger-eats.vercel.app/');
         cy.get('a').click();
-        cy.get(':nth-child(2) > :nth-child(2) > :nth-child(1) > input').type('Luiz Carlos Neto')
-        cy.get(':nth-child(2) > :nth-child(2) > :nth-child(2) > input').type('04705938143')
-        cy.get(':nth-child(3) > :nth-child(1) > input').type('luiz.neto@before.com.br')
-        cy.get(':nth-child(3) > :nth-child(2) > input').type('67992414555')
-        cy.get(':nth-child(3) > :nth-child(2) > :nth-child(1) > input').type('79013250')
-        cy.get(':nth-child(3) > :nth-child(2) > :nth-child(2) > input').click()
-        cy.get(':nth-child(4) > :nth-child(1) > input').type('540')
-        cy.get(':nth-child(4) > :nth-child(2) > input').type('Casa')
-        cy.get(':nth-child(4) > :nth-child(2) > input').click()
+        cy.get('[name="name"]').type('Luiz Carlos Neto');
+        cy.get('[name="email"]').type('luiz.neto@before.com.br');
+        cy.get('[name="cpf"]').type('04705938143')
+        cy.get('[name="whatsapp"]').type('67992414555')
+        cy.get('[name="postalcode"]').type('79013250')
+        cy.get('[value="Buscar CEP"]').click()
+        cy.get('[placeholder="Número"]').type('540')
+        cy.get('[placeholder="Complemento"]').type('Casa')
         cy.get('.delivery-method > :nth-child(3)').click()
-        cy.get('p').attachFile('download.png', { subjectType: 'drag-n-drop' })
+        cy.get('.dropzone').selectFile('download (1).jpeg', { action: 'drag-drop' })
+        cy.get('.button-success').click()
+        cy.get('.swal2-popup')
+            .should('contain.text', 'Recebemos os seus dados. Fique de olho na sua caixa de email, pois e em breve retornamos o contato.')
+            cy.get('.swal2-confirm').click()
     });
 });
